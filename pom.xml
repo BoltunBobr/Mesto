@@ -12,31 +12,36 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Указываем, куда сохранять результаты Allure -->
+        <allure.results.directory>target/allure-results</allure.results.directory>
     </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.13.0-M3</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- JUnit 4 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Allure для JUnit 4 -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
             <version>2.29.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Интеграция Allure с RestAssured -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
+            <artifactId>allure-rest-assured</artifactId>
             <version>2.29.1</version>
+            <scope>test</scope>
         </dependency>
+
+        <!-- RestAssured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -45,4 +50,18 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Плагин для генерации Allure-отчёта -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
+                <configuration>
+                    <reportVersion>2.29.1</reportVersion>
+                    <resultsDirectory>${allure.results.directory}</resultsDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
